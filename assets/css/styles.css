@@ -1,0 +1,399 @@
+/* ==========================================================================
+   ARGENTO TANGO EXPERIENCE — estilos principales
+   Toda la transición día → noche depende de UNA variable: --night-progress
+   (0 = mediodía en Caminito, 1 = noche cerrada). La actualiza main.js.
+   ========================================================================== */
+
+:root {
+  /* ── DÍA ── */
+  --day-sky:    #87CEEB;  /* celeste porteño */
+  --day-yellow: #E8C547;  /* amarillo Caminito */
+  --day-red:    #C0392B;  /* rojo fachada */
+  --day-green:  #2D6A4F;  /* verde conventillo */
+  --day-white:  #F5F0E8;  /* blanco cal */
+  --day-text:   #1a1a1a;
+  --day-blue:   #3b7fc4;  /* azul chapa */
+
+  /* ── NOCHE ── */
+  --night-bg:    #0d0d0d; /* negro parrilla */
+  --night-deep:  #1a1a2e; /* azul medianoche */
+  --night-fire:  #8b1a1a; /* rojo brasa */
+  --night-gold:  #d4a017; /* dorado llama */
+  --night-smoke: #2a2a2a; /* gris humo */
+  --night-text:  #f0e6d3; /* crema hueso */
+  --night-blue:  #1a2a3a; /* azul medianoche 2 */
+
+  /* ── PROGRESO DÍA→NOCHE (0..1) ── */
+  --night-progress: 0;
+  --np-pct: calc(var(--night-progress) * 100%);
+
+  /* Colores derivados: se mezclan solos según el progreso */
+  --page-bg:    color-mix(in srgb, var(--night-bg) var(--np-pct), var(--day-white));
+  --text-color: color-mix(in srgb, var(--night-text) var(--np-pct), var(--day-text));
+  --accent:     color-mix(in srgb, var(--night-gold) var(--np-pct), var(--day-red));
+  /* La UI flotante cambia de tema de golpe a mitad del atardecer (.is-night) para no quedar ilegible */
+  --ui-bg:      rgba(245,240,232,.85);
+  --ui-border:  rgba(26,26,26,.15);
+  --ui-text:    var(--day-text);
+  --ui-accent:  var(--day-red);
+  --img-filter: brightness(calc(1 - var(--night-progress) * .35)) saturate(calc(1 - var(--night-progress) * .3));
+
+  /* Tipografía */
+  --f-display: "Cormorant Garamond", "Times New Roman", serif;
+  --f-serif:   "Playfair Display", Georgia, serif;
+  --f-sans:    "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-script:  "Cormorant Garamond", "Playfair Display", Georgia, serif;   /* acento: itálica fina y elegante */
+  --navy:      #1b2a4a;  /* azul marino de las frases destacadas */
+
+  /* Layout */
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --maxw: 1200px;
+  --radius: 14px;
+  --vh: 100vh;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+:root.is-night { --ui-bg: rgba(13,13,13,.75); --ui-border: rgba(212,160,23,.55); --ui-text: var(--night-text); --ui-accent: var(--night-gold); }
+@supports (height: 100svh) { :root { --vh: 100svh; } }
+
+/* ── Reset mínimo ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--f-sans);
+  font-weight: 300;
+  font-size: clamp(1rem, .95rem + .25vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--text-color);
+  background: var(--page-bg);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img, video, svg, iframe { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 400; line-height: 1.1; }
+p { margin: 0 0 1em; }
+strong { font-weight: 500; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed; top: -100px; left: 1rem; z-index: 1000;
+  background: var(--day-text); color: var(--day-white); padding: .6rem 1rem; border-radius: 8px;
+}
+.skip-link:focus { top: 1rem; }
+
+.container { width: min(100% - 2 * var(--gutter), var(--maxw)); margin-inline: auto; position: relative; z-index: 2; }
+
+section { position: relative; isolation: isolate; }
+
+/* ── Tipografía de secciones ── */
+.section-head { text-align: center; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+.section-title {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(2.3rem, 1.6rem + 3.5vw, 4.6rem);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.section-meta {
+  font-family: var(--f-sans); font-weight: 500; text-transform: uppercase;
+  letter-spacing: .22em; font-size: clamp(.72rem, .68rem + .2vw, .85rem); margin: 1rem 0 .3rem;
+}
+.section-meta.small { font-weight: 400; letter-spacing: .14em; opacity: .85; margin: 0; }
+.section-sub { font-family: var(--f-serif); font-style: italic; font-size: clamp(1.15rem, 1rem + .8vw, 1.6rem); margin-top: .8rem; }
+.section-copy { max-width: 46rem; margin: 1.4rem auto 0; font-size: 1.08em; }
+.kicker {
+  font-family: var(--f-sans); font-weight: 500; text-transform: uppercase;
+  letter-spacing: .3em; font-size: .78rem; color: var(--night-gold); margin-bottom: .8rem;
+}
+.lead-script { font-family: var(--f-script); font-style: italic; font-weight: 500; letter-spacing: .01em; color: var(--navy); font-size: clamp(1.7rem, 1.3rem + 1.7vw, 2.7rem); line-height: 1.2; }
+.gold-text { color: var(--night-gold); }
+
+/* ── Fondos con imagen (se oscurecen con la noche) ── */
+.section-bg, .parallax-bg {
+  position: absolute; inset: 0; z-index: -2;
+  background: var(--img) center / cover no-repeat, var(--night-smoke);
+}
+.parallax-bg { inset: -15% 0; will-change: transform; }
+.day-img { filter: var(--img-filter); }
+.night-img { filter: grayscale(.25) contrast(1.1) brightness(.8); }
+
+.grain {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .09; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   TEXTO SOBRE FONDOS CLAROS — OBLIGATORIO (Hero, Historia, Almuerzo)
+   Títulos y cuerpo llevan sombra para que nunca se pierdan contra fotos claras.
+   ========================================================================== */
+.zone-day h1, .zone-day h2, .zone-day h3,
+.zone-day .section-title, .zone-day .menu-heading, .zone-day .menu-price,
+.zone-day .lead-script, .zone-day .quote, .zone-day .hero-tagline, .zone-day .logo-sub {
+  text-shadow: 0 2px 12px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.3);
+}
+.zone-day p, .zone-day li, .zone-day dt, .zone-day dd, .zone-day small, .zone-day .hero-kicker {
+  text-shadow: 0 1px 8px rgba(0,0,0,0.35);
+}
+/* El logo usa texto con degradado (background-clip): text-shadow ensuciaría el degradado,
+   así que la misma sombra se aplica como drop-shadow. */
+.hero .logo-main { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: #0d0d0d; filter: none; -webkit-text-fill-color: #0d0d0d;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.3); }
+
+/* ==========================================================================
+   SECCIÓN 1 · HERO
+   ========================================================================== */
+.hero {
+  min-height: var(--vh);
+  display: grid; place-items: center;
+  text-align: center; color: var(--day-text);
+  padding: 6rem var(--gutter) 9rem;
+  overflow: hidden;
+}
+.hero-video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -3;
+  filter: saturate(1.25) contrast(1.05);
+}
+.hero-overlay {
+  position: absolute; inset: 0; z-index: -2;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(245,240,232,.78) 0%, rgba(245,240,232,.35) 45%, transparent 75%),
+    linear-gradient(180deg, rgba(135,206,235,.45) 0%, rgba(245,240,232,.3) 60%, rgba(245,240,232,.85) 100%);
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-kicker {
+  font-weight: 500; text-transform: uppercase; letter-spacing: .35em; font-size: clamp(.66rem, .6rem + .3vw, .85rem);
+  color: var(--day-red); margin-bottom: 1rem;
+}
+.logo { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.logo-main {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(3.2rem, 1rem + 11vw, 10rem);
+  letter-spacing: .06em; line-height: .95; padding-left: .06em;
+  background: linear-gradient(100deg, var(--day-red) 0%, #d35400 30%, var(--day-blue) 62%, var(--day-green) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 0 rgba(255,255,255,.6));
+}
+.logo-sub {
+  font-family: var(--f-sans); font-weight: 300; font-size: clamp(.8rem, .6rem + 1vw, 1.35rem);
+  letter-spacing: clamp(.35em, .2em + 1vw, .75em); margin-top: .6rem; padding-left: .7em; color: var(--day-text);
+}
+.ornament { display: flex; align-items: center; justify-content: center; gap: .8rem; margin: 1.4rem auto; color: var(--day-yellow); }
+.ornament span { width: clamp(40px, 10vw, 110px); height: 1px; background: currentColor; }
+.ornament svg { width: 18px; fill: currentColor; }
+.hero-tagline { font-family: var(--f-serif); font-style: italic; font-size: clamp(1.2rem, 1rem + 1.2vw, 2rem); max-width: 30ch; margin-inline: auto; }
+
+.hero-ctas {
+  position: absolute; left: 50%; bottom: clamp(4.5rem, 10vh, 6.5rem); transform: translateX(-50%);
+  display: flex; gap: .8rem; flex-wrap: wrap; justify-content: center; width: min(100% - 2rem, 560px); z-index: 3;
+}
+.scroll-hint { position: absolute; left: 50%; bottom: 1.4rem; transform: translateX(-50%); width: 24px; height: 40px; border: 1.5px solid var(--day-text); border-radius: 14px; opacity: .6; }
+.scroll-hint span { position: absolute; left: 50%; top: 8px; width: 3px; height: 8px; margin-left: -1.5px; border-radius: 2px; background: var(--day-text); animation: scrollHint 1.8s infinite; }
+
+/* ==========================================================================
+   SECCIÓN 2 · HISTORIA (parallax)
+   ========================================================================== */
+.historia { padding: clamp(6rem, 14vw, 11rem) 0; overflow: hidden; color: var(--day-text); }
+.historia-veil {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(90deg, rgba(245,240,232,.95) 0%, rgba(245,240,232,.88) 55%, rgba(245,240,232,.55) 100%);
+}
+.historia-layers { max-width: 760px; margin-left: max(var(--gutter), calc((100% - var(--maxw)) / 2)); }
+.historia-layers p { font-size: clamp(1.05rem, 1rem + .35vw, 1.25rem); }
+.historia .section-title { color: var(--day-red); margin-bottom: 1rem; font-size: clamp(2.2rem, 1.6rem + 3vw, 4rem); }
+.historia .lead-script, .historia-layers .lead-script { color: var(--navy); font-size: clamp(1.7rem, 1.3rem + 1.7vw, 2.7rem); }
+.quote { font-family: var(--f-serif); font-style: italic; font-weight: 700; font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.6rem); line-height: 1.3; color: var(--day-green); }
+.divider-nouveau { color: var(--day-yellow); margin: 2.2rem 0; width: min(300px, 70%); }
+.divider-nouveau svg { width: 100%; height: auto; }
+.historia-couple {
+  position: absolute; right: max(1rem, 6vw); top: 50%; translate: 0 -50%;
+  height: min(70%, 520px); width: auto; fill: var(--day-red); opacity: .85; z-index: 1;
+}
+
+/* ==========================================================================
+   SECCIÓN 3A · ALMUERZO
+   ========================================================================== */
+.almuerzo { padding: clamp(5rem, 12vw, 9rem) 0; color: var(--day-text); overflow: hidden; }
+.almuerzo-veil { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(245,240,232,.94), rgba(220,238,246,.86) 40%, rgba(245,240,232,.95)); }
+.almuerzo .section-title { color: var(--day-red); }
+.almuerzo .section-meta { color: var(--day-green); }
+.almuerzo-grid { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.almuerzo-copy p { font-size: 1.08em; }
+.almuerzo .lead-script, .almuerzo-copy .lead-script { color: var(--navy); margin: 1.5rem 0; font-size: clamp(1.7rem, 1.3rem + 1.7vw, 2.7rem); }
+
+/* ==========================================================================
+   SECCIÓN 3B · ATARDECER (sticky + --night-progress)
+   ========================================================================== */
+.dusk { height: 320vh; background: var(--night-bg); }
+.dusk-sticky {
+  position: sticky; top: 0; height: var(--vh); overflow: hidden;
+  display: grid; place-items: center; text-align: center;
+}
+/* La foto real de la calle de Caminito es el lienzo: el atardecer es la MISMA foto
+   apagándose. Día: saturate(1.2) brightness(1.05) → Noche: saturate(.3) brightness(.45) + overlay oscuro. */
+.dusk-photo {
+  position: absolute; inset: -4% 0; z-index: 0;
+  background: url('https://commons.wikimedia.org/wiki/Special:FilePath/Caminito_Buenos_Aires_Argentina.jpg?width=1920') center 60% / cover no-repeat, var(--night-smoke);
+  filter:
+    saturate(calc(1.2 - var(--night-progress) * .9))
+    brightness(calc(1.05 - var(--night-progress) * .6))
+    contrast(calc(1 + var(--night-progress) * .15));
+  transform: scale(calc(1.08 - var(--night-progress) * .08));   /* leve "alejamiento" de cámara */
+  will-change: filter, transform;
+}
+/* Luz de atardecer: tinte cálido que sube a mitad de camino y se apaga al llegar la noche */
+.dusk-warm {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: soft-light;
+  background: linear-gradient(180deg, rgba(255,140,60,.9) 0%, rgba(255,90,40,.55) 55%, rgba(139,26,26,.6) 100%);
+  opacity: calc(clamp(0, var(--night-progress) * 2.2, 1) * clamp(0, calc((1 - var(--night-progress)) * 2), 1));
+}
+/* Overlay oscuro de la noche (azul medianoche arriba, negro parrilla abajo) */
+.dusk-dark {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(26,26,46,.85) 0%, rgba(13,13,13,.55) 45%, rgba(13,13,13,.8) 100%);
+  opacity: clamp(0, calc((var(--night-progress) - .15) * 1.25), .92);
+}
+.dusk-sticky .grain { z-index: 2; opacity: calc(var(--night-progress) * .12); }
+
+.dusk-text { position: relative; z-index: 3; padding: 0 var(--gutter); }
+.dusk-line1, .dusk-line2 { margin: 0; font-family: var(--f-display); }
+.dusk-line1 {
+  font-style: italic; font-weight: 400; font-size: clamp(1.8rem, 1.2rem + 3vw, 3.8rem);
+  color: #fff8ec;
+  opacity: clamp(0, calc((var(--night-progress) - .12) * 4), 1);
+  transform: translateY(calc(clamp(0, calc(1 - (var(--night-progress) - .12) * 4), 1) * 30px));
+  text-shadow: 0 2px 12px rgba(0,0,0,.6), 0 1px 3px rgba(0,0,0,.45);
+}
+.dusk-line2 {
+  font-weight: 700; text-transform: uppercase; letter-spacing: .14em;
+  font-size: clamp(2.6rem, 1.5rem + 6vw, 6.5rem); color: var(--night-gold);
+  opacity: clamp(0, calc((var(--night-progress) - .5) * 4), 1);
+  transform: scale(calc(.9 + clamp(0, calc((var(--night-progress) - .5) * 4), 1) * .1));
+  text-shadow: 0 0 30px rgba(212,160,23,.45), 0 4px 30px rgba(0,0,0,.7);
+}
+.dusk .embers { opacity: clamp(0, calc((var(--night-progress) - .4) * 2), 1); }
+
+/* ==========================================================================
+   ZONA NOCHE · base común
+   ========================================================================== */
+.zone-night { background: var(--night-bg); color: var(--night-text); }
+.zone-night .section-title { text-shadow: 0 2px 24px rgba(0,0,0,.6); font-weight: 700; }
+.night-veil { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(13,13,13,.92), rgba(13,13,13,.62) 35%, rgba(13,13,13,.72) 70%, rgba(13,13,13,.98)); }
+.night-veil.heavy { background: linear-gradient(180deg, rgba(13,13,13,.97), rgba(26,10,10,.82) 40%, rgba(13,13,13,.95)); }
+
+/* SECCIÓN 4 · PASEO */
+.paseo { padding: clamp(5rem, 12vw, 9rem) 0; overflow: hidden; }
+.paseo .section-title { color: var(--night-text); }
+.paseo .section-sub { color: var(--night-gold); }
+.paseo-copy { max-width: 46rem; margin: 0 auto 3.5rem; text-align: center; font-size: 1.08em; }
+.paseo-copy strong { color: var(--night-gold); }
+
+/* SEPARADOR · LA BRASA */
+.brasa {
+  min-height: clamp(380px, 56vh, 640px); display: grid; place-items: center; text-align: center;
+  overflow: hidden; padding: 4rem var(--gutter);
+}
+.brasa-img {
+  position: absolute; inset: 0; z-index: -3;
+  /* REEMPLAZAR por foto propia o de Pexels: "burning charcoal embers close up" */
+  background: url('https://commons.wikimedia.org/wiki/Special:FilePath/Embers_01.JPG?width=1920') center 70% / cover no-repeat, #1a0804;
+  animation: breathe 8s ease-in-out infinite;   /* el fuego "respira" */
+  transform-origin: 50% 60%;
+}
+.brasa-veil { position: absolute; inset: 0; z-index: -2; background: rgba(0,0,0,.3); box-shadow: inset 0 60px 80px -20px var(--night-bg), inset 0 -60px 80px -20px var(--night-bg); }
+.brasa .grain { z-index: -1; }
+.brasa .embers { z-index: 0; }
+.brasa-text { position: relative; z-index: 2; }
+.fire-line1, .fire-line2 {
+  font-family: var(--f-display); font-weight: 300; color: var(--night-text);
+  text-shadow: 0 0 40px rgba(212,160,23,.6), 0 2px 10px rgba(0,0,0,.55);
+  margin: 0;
+}
+.fire-line1 { font-style: italic; letter-spacing: .08em; font-size: clamp(1.4rem, 1rem + 1.6vw, 2.4rem); margin-bottom: .6rem; }
+.fire-line2 { text-transform: uppercase; letter-spacing: .28em; padding-left: .28em; font-size: clamp(2rem, 1rem + 4.5vw, 5rem); line-height: 1.1; }
+
+/* SECCIÓN 5 · CENA */
+.cena { padding: clamp(5rem, 12vw, 9rem) 0; overflow: hidden; }
+.cena .section-title { color: var(--night-text); }
+
+/* SECCIÓN 6 · SHOW */
+.show { padding: clamp(5rem, 12vw, 9rem) 0; background: radial-gradient(ellipse at 70% 0%, #2a0e0e 0%, var(--night-bg) 60%); overflow: hidden; }
+.spotlight {
+  position: absolute; top: -10%; left: 50%; width: 120%; height: 80%; translate: -50% 0; z-index: -1; pointer-events: none;
+  background: conic-gradient(from 180deg at 50% 0%, transparent 160deg, rgba(240,230,211,.07) 175deg, rgba(240,230,211,.12) 180deg, rgba(240,230,211,.07) 185deg, transparent 200deg);
+  animation: sway 9s ease-in-out infinite alternate;
+}
+.show-grid { display: grid; gap: 2.5rem; align-items: center; margin-bottom: 4rem; }
+.show .section-title { font-size: clamp(2rem, 1.4rem + 2.8vw, 3.8rem); text-transform: none; font-style: italic; font-weight: 400; }
+.show .section-copy { margin-left: 0; font-family: var(--f-serif); font-style: italic; font-size: clamp(1.2rem, 1rem + .8vw, 1.6rem); color: var(--night-gold); }
+.show-grid { position: relative; }
+.show-media {
+  position: absolute; z-index: -1; margin: 0; pointer-events: none;
+  top: -20%; bottom: -10%; right: calc(-1 * var(--gutter)); width: 62%;
+  -webkit-mask-image: radial-gradient(ellipse 70% 75% at 60% 50%, #000 35%, transparent 75%);
+          mask-image: radial-gradient(ellipse 70% 75% at 60% 50%, #000 35%, transparent 75%);
+  opacity: .55;
+}
+.show-media img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; filter: saturate(.9) contrast(1.05); }
+.show-copy { position: relative; z-index: 1; max-width: 34rem; }
+
+.finale { text-align: center; margin-top: clamp(4rem, 10vw, 7rem); padding: 3rem var(--gutter) 0; position: relative; }
+.finale p { font-family: var(--f-serif); font-style: italic; font-size: clamp(1.1rem, 1rem + .6vw, 1.45rem); margin: .2rem 0; }
+.finale .finale-big {
+  font-family: var(--f-display); font-style: normal; font-weight: 700; text-transform: uppercase; letter-spacing: .16em;
+  font-size: clamp(2.2rem, 1.3rem + 5vw, 5.5rem); margin-top: 2rem; line-height: 1.05;
+  background: linear-gradient(180deg, #ffe7a3, var(--night-gold) 55%, #9a6f0a); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 4px 24px rgba(212,160,23,.35));
+}
+
+/* SECCIÓN 7 · RESEÑAS + GALERÍA */
+.resenas { padding: clamp(5rem, 12vw, 9rem) 0; background: linear-gradient(180deg, var(--night-bg), var(--night-blue) 50%, var(--night-bg)); }
+#galeria { margin-top: clamp(4rem, 10vw, 7rem); }
+
+/* SECCIÓN 8 · CÓMO LLEGAR */
+.llegar { padding: clamp(5rem, 12vw, 9rem) 0; overflow: hidden; }
+.llegar-grid { display: grid; gap: 2rem; }
+
+/* SECCIÓN 9 · SOCIOS */
+.socios {
+  padding: clamp(5rem, 12vw, 9rem) 0; color: var(--night-text);
+  /* lino oscuro: tramado de líneas finas */
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at 20% 0%, #2b2118 0%, #17130f 55%, #0f0c0a 100%);
+  border-top: 1px solid rgba(212,160,23,.25);
+}
+.socios-grid { display: grid; gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
+.socios .section-title { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.6rem); }
+
+/* FOOTER */
+.footer { background: #080808; color: var(--night-text); padding: 4rem 0 2rem; border-top: 1px solid rgba(212,160,23,.2); }
+
+/* ==========================================================================
+   RESPONSIVE (mobile-first): 375 · 768 · 1280 · 1920
+   ========================================================================== */
+@media (max-width: 767px) {
+  .show-media { width: 100%; right: 0; top: -10%; opacity: .32; }
+  .historia-couple { opacity: .14; right: -30px; height: 60%; }
+  .hero-ctas .btn { flex: 1 1 100%; }
+}
+@media (min-width: 768px) {
+  .almuerzo-grid { grid-template-columns: 1fr 1fr; }
+  .llegar-grid { grid-template-columns: 1.3fr 1fr; }
+  .socios-grid { grid-template-columns: 1fr 1.1fr; }
+  .show-grid { min-height: 420px; align-content: center; }
+}
+@media (min-width: 1280px) {
+  .almuerzo-grid { grid-template-columns: 1.1fr 1fr; }
+}
+@media (min-width: 1920px) {
+  :root { --maxw: 1440px; }
+  body { font-size: 1.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .parallax-bg, [data-speed] { transform: none !important; }
+}

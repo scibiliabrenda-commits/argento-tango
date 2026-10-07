@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+node_modules/
+.vercel/
+.netlify/
+*.log
+# Originales pesados (subir solo las versiones comprimidas)
+assets/video/*-original.*
+assets/audio/*-original.*
+
+# Archivos pesados sin comprimir (no se suben a GitHub)
+originales/
