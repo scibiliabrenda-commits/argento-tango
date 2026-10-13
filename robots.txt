@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Cambiar por el dominio propio cuando exista
-Sitemap: https://scibiliabrenda-commits.github.io/argento-tango/sitemap.xml
+Sitemap: https://tangoshowargento.com/sitemap.xml
