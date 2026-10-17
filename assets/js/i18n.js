@@ -45,7 +45,8 @@ const translations = {
     lunchNote: "Reservas sujetas a disponibilidad. Consulte por grupos y fechas especiales.",
 
     duskLine1: "Cuando cae la noche en Caminito...",
-    duskLine2: "todo cambia.",
+    duskLine2: "todo cambia...",
+    duskCue: "Seguí bajando",
 
     walkTitle: "Caminito de noche",
     walkSub: "Una experiencia que solo podés vivir con nosotros.",
@@ -69,6 +70,7 @@ const translations = {
     menuPremium: "Menú Argento Premium",
     n1Title: "Tira de asado",
     n1Sub: "a la parrilla a leña",
+    starter: "Entrada",
     side: "Guarnición de estación",
     drink: "Bebida seleccionada",
     dessert: "Postre tradicional",
@@ -200,7 +202,8 @@ const translations = {
     lunchNote: "Subject to availability. Ask us about groups and special dates.",
 
     duskLine1: "When night falls on Caminito...",
-    duskLine2: "everything changes.",
+    duskLine2: "everything changes...",
+    duskCue: "Keep scrolling",
 
     walkTitle: "Caminito by night",
     walkSub: "An experience you can only live with us.",
@@ -224,6 +227,7 @@ const translations = {
     menuPremium: "Argento Premium Menu",
     n1Title: "Beef short ribs",
     n1Sub: "tira de asado on the wood-fired grill",
+    starter: "Starter",
     side: "Seasonal side",
     drink: "Selected drink",
     dessert: "Traditional dessert",
@@ -355,7 +359,8 @@ const translations = {
     lunchNote: "Reservas sujeitas à disponibilidade. Consulte para grupos e datas especiais.",
 
     duskLine1: "Quando a noite cai em Caminito...",
-    duskLine2: "tudo muda.",
+    duskLine2: "tudo muda...",
+    duskCue: "Continue descendo",
 
     walkTitle: "Caminito à noite",
     walkSub: "Uma experiência que você só vive com a gente.",
@@ -379,6 +384,7 @@ const translations = {
     menuPremium: "Menu Argento Premium",
     n1Title: "Costela (tira de asado)",
     n1Sub: "na parrilla a lenha",
+    starter: "Entrada",
     side: "Acompanhamento da estação",
     drink: "Bebida selecionada",
     dessert: "Sobremesa tradicional",

@@ -224,7 +224,9 @@ section { position: relative; isolation: isolate; }
 /* ==========================================================================
    SECCIÓN 3B · ATARDECER (sticky + --night-progress)
    ========================================================================== */
-.dusk { height: 320vh; background: var(--night-bg); }
+/* 180vh = 80vh de recorrido con la foto fija. Con 320vh la gente creía que la página
+   terminaba acá y dejaba de bajar (Bren, 2026-10-17). */
+.dusk { height: 180vh; background: var(--night-bg); }
 .dusk-sticky {
   position: sticky; top: 0; height: var(--vh); overflow: hidden;
   display: grid; place-items: center; text-align: center;
@@ -273,6 +275,21 @@ section { position: relative; isolation: isolate; }
 }
 .dusk .embers { opacity: clamp(0, calc((var(--night-progress) - .4) * 2), 1); }
 
+/* "Seguí bajando": está desde el primer cuadro (la foto de día fija parecía el final de
+   la página, Bren 2026-10-17) y se va cuando asoma el título del paseo.
+   Va en una pastilla oscura para leerse sobre la foto clara de día. */
+.dusk-cue {
+  position: absolute; left: 50%; bottom: clamp(1.2rem, 4vh, 2.5rem); z-index: 3; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .1rem;
+  padding: .6rem 1.3rem .35rem; border-radius: 999px;
+  background: rgba(13,13,13,.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  border: 1px solid rgba(212,160,23,.55);
+  color: #fff8ec; text-decoration: none; font-size: .8rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  white-space: nowrap;
+  opacity: clamp(0, calc((.88 - var(--night-progress)) * 10), 1);
+}
+.dusk-cue .ico { width: 1.8rem; height: 1.8rem; stroke-width: 2; color: var(--night-gold); animation: cueBounce 1.6s ease-in-out infinite; }
+
 /* ==========================================================================
    ZONA NOCHE · base común
    ========================================================================== */
@@ -282,7 +299,16 @@ section { position: relative; isolation: isolate; }
 .night-veil.heavy { background: linear-gradient(180deg, rgba(13,13,13,.97), rgba(26,10,10,.82) 40%, rgba(13,13,13,.95)); }
 
 /* SECCIÓN 4 · PASEO */
-.paseo { padding: clamp(5rem, 12vw, 9rem) 0; overflow: hidden; }
+/* El paseo se monta 30vh sobre el final del atardecer (con el borde de arriba fundido),
+   así el título "Caminito de noche" ya asoma mientras la foto sigue fija. */
+.paseo {
+  --peek: 30vh;
+  margin-top: calc(var(--peek) * -1); z-index: 1;
+  padding: calc(var(--peek) * .5) 0 clamp(5rem, 12vw, 9rem);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 var(--peek));
+          mask-image: linear-gradient(180deg, transparent 0, #000 var(--peek));
+}
 .paseo .section-title { color: var(--night-text); }
 .paseo .section-sub { color: var(--night-gold); }
 .paseo-copy { max-width: 46rem; margin: 0 auto 3.5rem; text-align: center; font-size: 1.08em; }
