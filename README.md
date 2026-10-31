@@ -5,7 +5,7 @@ Una sola página con dos personalidades: **día** (almuerzo + show) y **noche** 
 
 - 100 % estático: HTML + CSS + JavaScript vanilla. Sin build, sin dependencias, sin backend.
 - Idiomas: Español / English / Português (se recuerda la elección del visitante).
-- Reservas por WhatsApp (+54 9 11 2732-7601) · Formulario B2B para agencias vía Formspree.
+- Reservas por WhatsApp (+54 9 11 7814-9294) · Formulario B2B para agencias vía Formspree.
 
 ---
 
@@ -45,7 +45,7 @@ Para usar dominio propio (ej. `argentotango.com`), configurarlo en el panel del 
 | 12 | Probar el WhatsApp desde un celular. | — |
 
 WhatsApp: todos los botones usan
-`https://wa.me/5491127327601?text=Quiero%20reservar%20mi%20lugar%20en%20Argento`
+`https://wa.me/5491178149294?text=Quiero%20reservar%20mi%20lugar%20en%20Argento`
 (buscar `wa.me` en `index.html` para cambiar número o mensaje; los espacios del mensaje se escriben `%20`).
 
 ---
