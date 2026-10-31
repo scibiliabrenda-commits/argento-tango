@@ -147,7 +147,7 @@ section { position: relative; isolation: isolate; }
   min-height: var(--vh);
   display: grid; place-items: center;
   text-align: center; color: var(--day-text);
-  padding: 6rem var(--gutter) 9rem;
+  padding: 6rem var(--gutter) 13.5rem; /* 9rem de los botones + 4.5rem del aviso de la apertura */
   overflow: hidden;
 }
 .hero-video {
@@ -182,6 +182,16 @@ section { position: relative; isolation: isolate; }
 .ornament span { width: clamp(40px, 10vw, 110px); height: 1px; background: currentColor; }
 .ornament svg { width: 18px; fill: currentColor; }
 .hero-tagline { font-family: var(--f-serif); font-style: italic; font-size: clamp(1.2rem, 1rem + 1.2vw, 2rem); max-width: 30ch; margin-inline: auto; }
+/* Aviso de la gran apertura de la cena */
+.hero-opening {
+  display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .35rem .7rem;
+  flex: 1 1 100%; padding: .6rem 1.2rem; border: 1px solid var(--night-gold); border-radius: 999px;
+  background: rgba(13,13,13,.72); color: var(--night-text); text-decoration: none;
+  font-size: clamp(.78rem, .72rem + .3vw, .95rem); letter-spacing: .04em; text-shadow: none;
+  animation: pulseGold 2.6s ease-in-out infinite;
+}
+.hero-opening-label { color: var(--night-gold); font-weight: 600; text-transform: uppercase; letter-spacing: .18em; font-size: .85em; }
+.hero-opening:hover, .hero-opening:focus-visible { background: rgba(13,13,13,.88); }
 
 .hero-ctas {
   position: absolute; left: 50%; bottom: clamp(4.5rem, 10vh, 6.5rem); transform: translateX(-50%);
@@ -403,6 +413,7 @@ section { position: relative; isolation: isolate; }
   .show-media { width: 100%; right: 0; top: -10%; opacity: .32; }
   .historia-couple { opacity: .14; right: -30px; height: 60%; }
   .hero-ctas .btn { flex: 1 1 100%; }
+  .hero { padding-bottom: 21rem; } /* botones apilados + aviso de la apertura */
 }
 @media (min-width: 768px) {
   .almuerzo-grid { grid-template-columns: 1fr 1fr; }
