@@ -147,12 +147,12 @@ section { position: relative; isolation: isolate; }
   min-height: var(--vh);
   display: grid; place-items: center;
   text-align: center; color: var(--day-text);
-  padding: 6rem var(--gutter) 13.5rem; /* 9rem de los botones + 4.5rem del aviso de la apertura */
+  padding: 6rem var(--gutter) 9rem; /* espacio de los botones */
   overflow: hidden;
 }
 .hero-video {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -3;
-  filter: saturate(1.25) contrast(1.05);
+  filter: saturate(.8) contrast(.98) brightness(1.03); /* el video propio ya viene muy saturado: se baja */
 }
 .hero-overlay {
   position: absolute; inset: 0; z-index: -2;
@@ -182,16 +182,6 @@ section { position: relative; isolation: isolate; }
 .ornament span { width: clamp(40px, 10vw, 110px); height: 1px; background: currentColor; }
 .ornament svg { width: 18px; fill: currentColor; }
 .hero-tagline { font-family: var(--f-serif); font-style: italic; font-size: clamp(1.2rem, 1rem + 1.2vw, 2rem); max-width: 30ch; margin-inline: auto; }
-/* Aviso de la gran apertura de la cena */
-.hero-opening {
-  display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .35rem .7rem;
-  flex: 1 1 100%; padding: .6rem 1.2rem; border: 1px solid var(--night-gold); border-radius: 999px;
-  background: rgba(13,13,13,.72); color: var(--night-text); text-decoration: none;
-  font-size: clamp(.78rem, .72rem + .3vw, .95rem); letter-spacing: .04em; text-shadow: none;
-  animation: pulseGold 2.6s ease-in-out infinite;
-}
-.hero-opening-label { color: var(--night-gold); font-weight: 600; text-transform: uppercase; letter-spacing: .18em; font-size: .85em; }
-.hero-opening:hover, .hero-opening:focus-visible { background: rgba(13,13,13,.88); }
 
 .hero-ctas {
   position: absolute; left: 50%; bottom: clamp(4.5rem, 10vh, 6.5rem); transform: translateX(-50%);
@@ -321,6 +311,34 @@ section { position: relative; isolation: isolate; }
 }
 .paseo .section-title { color: var(--night-text); }
 .paseo .section-sub { color: var(--night-gold); }
+/* CARRETE de fotos (debajo de "Caminito de noche") */
+.carrete {
+  position: relative; overflow: hidden;
+  margin: 0 calc(50% - 50vw) 3.5rem; padding: 12px 0;
+  background: rgba(13,13,13,.55);
+  border-block: 1px solid rgba(212,160,23,.35);
+  box-shadow: 0 20px 60px rgba(0,0,0,.45);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.carrete-track { display: flex; width: max-content; }
+.carrete-track img {
+  display: block; flex: none; height: clamp(180px, 26vw, 320px); width: auto; aspect-ratio: 4 / 3; object-fit: cover;
+  filter: saturate(1.05) contrast(1.05) brightness(.95);
+}
+.carrete.is-running .carrete-track { animation: carrete 70s linear infinite; }
+.carrete.is-running:hover .carrete-track { animation-play-state: paused; }
+@keyframes carrete { to { transform: translateX(-50%); } }
+/* mismo velo y grano de la web, más tenues, para que la tira resalte sobre el fondo */
+.carrete-veil {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(13,13,13,.28), rgba(13,13,13,.04) 35%, rgba(13,13,13,.04) 65%, rgba(13,13,13,.32));
+}
+.carrete .grain { z-index: 2; opacity: .05; }
+@media (prefers-reduced-motion: reduce) {
+  .carrete { overflow-x: auto; }
+}
+
 .paseo-copy { max-width: 46rem; margin: 0 auto 3.5rem; text-align: center; font-size: 1.08em; }
 .paseo-copy strong { color: var(--night-gold); }
 
@@ -329,20 +347,40 @@ section { position: relative; isolation: isolate; }
   min-height: clamp(380px, 56vh, 640px); display: grid; place-items: center; text-align: center;
   overflow: hidden; padding: 4rem var(--gutter);
 }
-.brasa-img {
-  position: absolute; inset: 0; z-index: -3;
-  /* REEMPLAZAR por foto propia o de Pexels: "burning charcoal embers close up" */
-  background: url('https://commons.wikimedia.org/wiki/Special:FilePath/Embers_01.JPG?width=1920') center 70% / cover no-repeat, #1a0804;
-  animation: breathe 8s ease-in-out infinite;   /* el fuego "respira" */
-  transform-origin: 50% 60%;
+.brasa-video {
+  position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 60%; background: #1a0804;
+  /* el video ya viene aclarado y con tono cálido (ffmpeg); acá solo se le da un toque de luz */
+  filter: brightness(1.08);
 }
-.brasa-veil { position: absolute; inset: 0; z-index: -2; background: rgba(0,0,0,.3); box-shadow: inset 0 60px 80px -20px var(--night-bg), inset 0 -60px 80px -20px var(--night-bg); }
+.brasa-veil { position: absolute; inset: 0; z-index: -2; background: rgba(0,0,0,.12); box-shadow: inset 0 60px 80px -20px var(--night-bg), inset 0 -60px 80px -20px var(--night-bg); }
 .brasa .grain { z-index: -1; }
 .brasa .embers { z-index: 0; }
-.brasa-text { position: relative; z-index: 2; }
+.brasa-text { position: relative; z-index: 2; padding: 1.5rem 2rem; }
+/* Destello dorado detrás de las letras */
+.brasa-text::before {
+  content: ""; position: absolute; inset: -20% -12%; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(212,160,23,.14) 0%, rgba(212,160,23,.06) 40%, rgba(212,160,23,0) 70%);
+  filter: blur(10px);
+}
+/* PAUSA EN VIDEO · BANDONEÓN */
+.video-break { height: clamp(280px, 62vh, 640px); overflow: hidden; }
+.video-break-media {
+  position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 40%; background: var(--night-bg);
+  filter: grayscale(.15) contrast(1.08) brightness(.9);
+}
+.video-break-veil {
+  position: absolute; inset: 0; z-index: -2; background: rgba(13,13,13,.18);
+  box-shadow: inset 0 90px 90px -30px var(--night-bg), inset 0 -90px 90px -30px var(--night-bg);
+}
+.video-break .grain { z-index: -1; }
+
 .fire-line1, .fire-line2 {
-  font-family: var(--f-display); font-weight: 300; color: var(--night-text);
-  text-shadow: 0 0 40px rgba(212,160,23,.6), 0 2px 10px rgba(0,0,0,.55);
+  font-family: var(--f-display); font-weight: 600; color: #fff;
+  text-shadow:
+    0 2px 6px rgba(0,0,0,.7),
+    0 0 28px rgba(212,160,23,.45);
   margin: 0;
 }
 .fire-line1 { font-style: italic; letter-spacing: .08em; font-size: clamp(1.4rem, 1rem + 1.6vw, 2.4rem); margin-bottom: .6rem; }
@@ -413,7 +451,7 @@ section { position: relative; isolation: isolate; }
   .show-media { width: 100%; right: 0; top: -10%; opacity: .32; }
   .historia-couple { opacity: .14; right: -30px; height: 60%; }
   .hero-ctas .btn { flex: 1 1 100%; }
-  .hero { padding-bottom: 21rem; } /* botones apilados + aviso de la apertura */
+  .hero { padding-bottom: 16.5rem; } /* botones apilados */
 }
 @media (min-width: 768px) {
   .almuerzo-grid { grid-template-columns: 1fr 1fr; }

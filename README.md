@@ -5,7 +5,7 @@ Una sola página con dos personalidades: **día** (almuerzo + show) y **noche** 
 
 - 100 % estático: HTML + CSS + JavaScript vanilla. Sin build, sin dependencias, sin backend.
 - Idiomas: Español / English / Português (se recuerda la elección del visitante).
-- Reservas por WhatsApp (+54 9 11 7814-9294) · Formulario B2B para agencias vía Formspree.
+- Reservas por WhatsApp (+54 9 11 7814-9294) · Formulario B2B para agencias (llega a reservas@ vía FormSubmit).
 
 ---
 
@@ -35,8 +35,8 @@ Para usar dominio propio (ej. `argentotango.com`), configurarlo en el panel del 
 
 | # | Qué | Dónde |
 |---|---|---|
-| 1 | **Reseñas**: hoy muestra datos reales de Google (4.7 · 2.060 opiniones, oct 2026) y 3 reseñas reales copiadas. Actualizar cada tanto a mano, o conectar Places API (sección 4). | `index.html` sección `#resenas` |
-| 3 | **Formspree**: configurado (formulario "argento colaboradores"). Ver sección 3 para cambiarlo. | `index.html` |
+| 1 | **Reseñas**: hoy muestra datos reales de Google (4.8 · 2.304 opiniones, nov 2026) y 3 reseñas reales copiadas. Actualizar cada tanto a mano, o conectar Places API (sección 4). | `index.html` sección `#resenas` |
+| 3 | **Formulario de agencias**: llega a reservas@ vía FormSubmit. Requiere activarlo una vez (sección 3). | `index.html` |
 | 7 | **Fotos**: reemplazar las de ejemplo por fotos propias (ver `assets/images/README.md`). | `index.html` |
 | 8 | **Video del hero**: `assets/video/hero.mp4` (ver `assets/video/README.md`). | — |
 | 9 | **Audio**: `assets/audio/dia.mp3`, `assets/audio/noche.mp3` y `assets/audio/brasas.mp3` (sección 5). | — |
@@ -50,23 +50,18 @@ WhatsApp: todos los botones usan
 
 ---
 
-## 3. Formspree (formulario de agencias)
+## 3. Formulario de agencias (FormSubmit → reservas@)
 
-1. Crear una cuenta gratis en <https://formspree.io> (plan Free: 50 envíos/mes).
-2. **+ New Form** → nombre "Argento – Socios" → email donde querés recibir las solicitudes.
-3. Formspree muestra un endpoint del tipo `https://formspree.io/f/abcdwxyz`. Copiá el código final (`abcdwxyz`).
-4. En `index.html` (línea ~542) reemplazar:
-   ```html
-   action="https://formspree.io/f/REEMPLAZAR"
-   ```
-   por
-   ```html
-   action="https://formspree.io/f/abcdwxyz"
-   ```
-5. Publicar y enviar una solicitud de prueba. La primera vez Formspree pide confirmar el email.
+Las solicitudes del formulario de socios llegan a **reservas@tangoshowargento.com** a través de [FormSubmit](https://formsubmit.co) (gratis, sin cuenta).
 
-Mientras el `action` diga `REEMPLAZAR`, el formulario valida los campos pero muestra "Formulario sin configurar" en vez de enviar.
-Incluye anti-spam (campo oculto `_gotcha`), validación de obligatorios y email, y mensajes en el idioma elegido.
+- El `action` del `<form id="b2bForm">` es `https://formsubmit.co/ajax/reservas@tangoshowargento.com`.
+- **Activación (una sola vez):** el primer envío no se entrega; FormSubmit manda a reservas@ un mail "Action Required: Activate FormSubmit". Hay que tocar el botón de activar. Desde ahí, todos los envíos llegan.
+- Después de activar, FormSubmit ofrece un código aleatorio para no mostrar el mail en el código: se puede reemplazar `reservas@tangoshowargento.com` en el `action` por ese código.
+- Para cambiar el mail de destino, reemplazarlo en el `action` (vuelve a pedir activación).
+
+Incluye anti-spam (campo oculto `_honey`), validación de obligatorios y email, y mensajes en el idioma elegido. Si el envío falla, la web lo avisa y sugiere escribir por WhatsApp.
+
+(Antes usaba Formspree con la cuenta personal de Brenda, que nunca se verificó: por eso no llegaba nada.)
 
 ---
 
@@ -143,7 +138,7 @@ argento-tango/
     │   ├── i18n.js          # Traducciones ES/EN/PT + switchLanguage()
     │   ├── main.js          # Día→noche, parallax, reveals, footer
     │   ├── audio.js         # Crossfade día/noche + capa de brasas (Web Audio API)
-    │   └── form.js          # Validación + envío Formspree
+    │   └── form.js          # Validación + envío FormSubmit
     ├── images/README.md · audio/README.md · video/README.md
 ```
 

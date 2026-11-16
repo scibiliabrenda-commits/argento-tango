@@ -156,6 +156,29 @@
   rotate(document.getElementById("taglineRotator"), "heroTagline", 4000);
   rotate(document.getElementById("phraseRotator"), "phrase", 5000);
 
+  // Carrete de fotos: duplicar la tira para que el desplazamiento sea un loop sin cortes
+  const carrete = document.querySelector(".carrete");
+  if (carrete && !reduceMotion) {
+    const track = carrete.querySelector(".carrete-track");
+    [...track.children].forEach((img) => {
+      const c = img.cloneNode(true);
+      c.alt = ""; c.setAttribute("aria-hidden", "true");
+      track.appendChild(c);
+    });
+    carrete.classList.add("is-running");
+  }
+
+  // Videos de la noche (parrilla, bandoneón): sin sonido, solo se reproducen en pantalla
+  const clips = [...document.querySelectorAll("video[data-autoplay]")];
+  if (clips.length && !reduceMotion && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      const v = e.target;
+      v.muted = true;
+      if (e.isIntersecting) { const p = v.play(); if (p) p.catch(() => {}); } else v.pause();
+    }), { threshold: 0.15 });
+    clips.forEach((v) => io.observe(v));
+  }
+
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 })();

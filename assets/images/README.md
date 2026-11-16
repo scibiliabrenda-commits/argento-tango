@@ -24,3 +24,15 @@ Para usar fotos propias:
 4. Escribir un `alt` descriptivo en cada `<img>` (accesibilidad y SEO).
 
 Fuentes libres alternativas: <https://www.pexels.com> (buscar "La Boca Buenos Aires colorful", "Argentine asado grill fire", "tango dancers Buenos Aires", "Caminito street colorful cobblestone Buenos Aires", "burning charcoal embers close up").
+
+## Fotos y videos propios de la noche (nov 2026)
+
+| Archivo | Se usa en |
+|---|---|
+| `noche-rio.webp` | Fondo de "Caminito de noche" (paseo) |
+| `noche-cena.webp` | Fondo de la Cena Tango Show (menús) |
+| `noche-arboles.webp` | Fondo de "Cómo llegar" |
+| `../video/parrilla.mp4` + `parrilla-poster.jpg` | Separador "Argento los espera" (3 s en cámara lenta, sin sonido) |
+| `../video/bandoneon.mp4` + `bandoneon-poster.jpg` | Pausa en video entre los menús y el show (4,5 s, sin sonido) |
+
+Los videos se reproducen en loop, sin sonido, solo cuando están en pantalla (ver `main.js`).

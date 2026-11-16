@@ -27,11 +27,11 @@
   <!-- Tipografías -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/styles.css?v=16">
-  <link rel="stylesheet" href="assets/css/animations.css?v=16">
-  <link rel="stylesheet" href="assets/css/components.css?v=16">
+  <link rel="stylesheet" href="assets/css/styles.css?v=25">
+  <link rel="stylesheet" href="assets/css/animations.css?v=25">
+  <link rel="stylesheet" href="assets/css/components.css?v=25">
 
   <!-- Schema.org: Restaurant + LocalBusiness + Event -->
   <script type="application/ld+json">
@@ -65,16 +65,16 @@
       {
         "@type": "Event",
         "name": "Argento Cena Tango Show + Caminito de Noche",
-        "description": "Paseo nocturno exclusivo por Caminito, cena de parrilla a leña y show de tango con 3 parejas, orquesta y cantante en vivo.",
+        "description": "Paseo nocturno exclusivo por Caminito, cena de parrilla a leña y show de tango con bailarines, orquesta y cantante en vivo.",
         "eventStatus": "https://schema.org/EventScheduled",
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "startDate": "2026-11-01T20:00-03:00",
+        "startDate": "2026-11-14T19:30-03:00",
         "location": { "@id": "https://tangoshowargento.com/#restaurant" },
         "organizer": { "@id": "https://tangoshowargento.com/#restaurant" },
         "offers": [
-          { "@type": "Offer", "name": "Menú Cena Show · Tira de Asado", "price": "80", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder", "validFrom": "2026-10-01" },
-          { "@type": "Offer", "name": "Menú Selección · Vacío a la Estaca", "price": "120", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder", "validFrom": "2026-10-01" },
-          { "@type": "Offer", "name": "Menú Premium", "price": "180", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder", "validFrom": "2026-10-01" }
+          { "@type": "Offer", "name": "Menú Cena Show · Tira de Asado", "price": "80", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "validFrom": "2026-10-01" },
+          { "@type": "Offer", "name": "Menú Selección · Vacío a la Estaca", "price": "120", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "validFrom": "2026-10-01" },
+          { "@type": "Offer", "name": "Menú Premium", "price": "180", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "validFrom": "2026-10-01" }
         ]
       }
     ]
@@ -110,11 +110,11 @@
   <main>
     <!-- ═══════════════════════ SECCIÓN 1 · HERO (DÍA) ═══════════════════════ -->
     <section id="inicio" class="hero zone-day" aria-label="Argento Tango Experience">
-      <!-- VIDEO HERO: REEMPLAZAR: colocar /assets/video/hero.mp4 (Caminito de día, máx 5MB). Si falta, se ve el poster. -->
+      <!-- VIDEO HERO: video propio de Argento (primeros 6 s de borra.mp4, sin sonido). Si falta, se ve el poster. -->
       <video class="hero-video" autoplay muted loop playsinline preload="metadata"
-             poster="assets/images/hero-poster.jpg"
+             poster="assets/images/hero-poster.jpg?v=2"
              aria-hidden="true">
-        <source src="assets/video/hero.mp4" type="video/mp4">
+        <source src="assets/video/hero.mp4?v=2" type="video/mp4">
       </video>
       <div class="hero-overlay"></div>
       <div class="grain" aria-hidden="true"></div>
@@ -130,8 +130,6 @@
       </div>
 
       <div class="hero-ctas">
-        <!-- GRAN APERTURA de la cena: sacar este aviso (y .hero-opening en styles.css) cuando ya haya pasado -->
-        <a href="#cena" class="hero-opening"><span class="hero-opening-label" data-i18n="openingLabel">Gran apertura</span> <span data-i18n="openingDate">Cena Tango Show · Sábado 14 de noviembre</span></a>
         <a href="#almuerzo" class="btn btn-day" data-i18n="heroCtaDay">Almuerzo &amp; Show</a>
         <a href="#paseo" class="btn btn-night" data-i18n="heroCtaNight">Cena Tango Show</a>
       </div>
@@ -145,17 +143,17 @@
 
 
       <div class="container historia-layers">
-        <div class="layer-wrap" data-speed="0.06"><div class="layer reveal">
+        <div class="layer-wrap"><div class="layer reveal">
           <p class="lead-script" data-i18n="histLead">Hay lugares en Buenos Aires que el turista no encuentra en ninguna guía.</p>
           <p data-i18n="hist1">Rincones que pertenecen al barrio. Noches que pertenecen a quienes lo vivieron.</p>
         </div></div>
         <div class="divider-nouveau" aria-hidden="true"><svg viewBox="0 0 300 30"><use href="#nouveau"/></svg></div>
-        <div class="layer-wrap" data-speed="0.12"><div class="layer reveal">
+        <div class="layer-wrap"><div class="layer reveal">
           <h2 class="section-title" data-i18n="hist2">Argento nació de eso.</h2>
           <p data-i18n="hist3">De gente de La Boca que conoce sus calles, sus historias y sus secretos. Que decidió abrir las puertas de algo verdadero: el fuego de la parrilla, el alma del tango, la pasión de Caminito.</p>
         </div></div>
         <div class="divider-nouveau" aria-hidden="true"><svg viewBox="0 0 300 30"><use href="#nouveau"/></svg></div>
-        <div class="layer-wrap" data-speed="0.18"><div class="layer reveal">
+        <div class="layer-wrap"><div class="layer reveal">
           <p class="quote" data-i18n="hist4">No es solo un show de tango, es la cultura original mostrándose como es.</p>
         </div></div>
       </div>
@@ -245,7 +243,7 @@
 
     <!-- ═══════════════════════ SECCIÓN 4 · CAMINITO DE NOCHE (NOCHE) ═══════════════════════ -->
     <section id="paseo" class="paseo zone-night">
-      <div class="section-bg night-img" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/La_Boca_Corner_Of_Nostalgia_And_Tango_(247462367).jpeg?width=1600')" role="img" aria-label="Esquina de La Boca de noche, con faroles y casas de chapa"></div>
+      <div class="section-bg night-img" style="--img:url('../images/noche-rio.webp')" role="img" aria-label="Mesas de Argento al aire libre de noche, junto al Riachuelo iluminado"></div>
       <div class="night-veil"></div>
       <div class="grain" aria-hidden="true"></div>
       <div class="container">
@@ -254,6 +252,21 @@
           <h2 class="section-title" data-i18n="walkTitle">Caminito de noche</h2>
           <p class="section-sub" data-i18n="walkSub">Una experiencia que solo podés vivir con nosotros.</p>
         </header>
+
+        <!-- CARRETE: tira de fotos de las noches en Argento. main.js duplica las fotos para que el loop no tenga cortes -->
+        <div class="carrete" role="region" aria-label="Fotos de las noches en Argento">
+          <div class="carrete-track">
+            <img src="assets/images/carrete/01-tango-salon.webp" alt="Pareja de tango bailando entre las mesas del salón de Argento" width="960" height="720" loading="lazy" decoding="async">
+            <img src="assets/images/carrete/02-cena.webp" alt="Comensales cenando con vino bajo la carpa, de noche" width="960" height="720" loading="lazy" decoding="async">
+            <img src="assets/images/carrete/03-orquesta.webp" alt="Cantante y músicos en vivo en el balcón del salón" width="960" height="720" loading="lazy" decoding="async">
+            <img src="assets/images/carrete/04-rio.webp" alt="Mesas al aire libre frente al Riachuelo iluminado" width="960" height="720" loading="lazy" decoding="async">
+            <img src="assets/images/carrete/05-bienvenidos.webp" alt="Salón de Argento con chapas de colores y cartel de bienvenida" width="960" height="720" loading="lazy" decoding="async">
+            <img src="assets/images/carrete/06-arboles.webp" alt="Mesas bajo los árboles con guirnaldas de luces" width="960" height="720" loading="lazy" decoding="async">
+            <img src="assets/images/carrete/07-escenario.webp" alt="Bailarines de tango en el escenario frente al público" width="960" height="720" loading="lazy" decoding="async">
+          </div>
+          <div class="carrete-veil" aria-hidden="true"></div>
+          <div class="grain" aria-hidden="true"></div>
+        </div>
         <div class="paseo-copy reveal">
           <p data-i18n="walk1">Cuando la actividad comercial se detiene y las luces toman el control, Caminito se convierte en otro lugar.</p>
           <p data-i18n="walk2">Las fachadas de colores cobran una dimensión nueva bajo la iluminación nocturna. Los rincones más pintorescos, vacíos de movimiento, esperan ser descubiertos.</p>
@@ -282,7 +295,10 @@
     <!-- ═══════════════════════ SEPARADOR · LA BRASA (NOCHE) ═══════════════════════ -->
     <!-- Al entrar en pantalla suena /assets/audio/brasas.mp3 (si el audio está activado) — ver audio.js -->
     <section id="brasa" class="brasa zone-night" aria-label="Las brasas de Argento">
-      <div class="brasa-img" role="img" aria-label="Primer plano de brasas de carbón encendidas, rojas y doradas entre cenizas"></div>
+      <!-- Video propio de la parrilla (sin sonido, 3 s en cámara lenta, en loop) -->
+      <video class="brasa-video" muted loop playsinline preload="metadata" poster="assets/images/parrilla-poster.jpg?v=2" aria-label="La parrilla de Argento humeando de noche" data-autoplay>
+        <source src="assets/video/parrilla.mp4?v=2" type="video/mp4">
+      </video>
       <div class="brasa-veil"></div>
       <div class="grain" aria-hidden="true"></div>
       <div class="embers" aria-hidden="true">
@@ -296,8 +312,8 @@
 
     <!-- ═══════════════════════ SECCIÓN 5 · CENA TANGO SHOW (NOCHE) ═══════════════════════ -->
     <section id="cena" class="cena zone-night">
-      <div class="section-bg night-img fire-img" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Asado_tradicional_argentino,_le%C3%B1a,_brasas.jpg?width=1600')" role="img" aria-label="Parrilla a leña con brasas encendidas y carne asándose"></div>
-      <div class="night-veil heavy"></div>
+      <div class="section-bg night-img" style="--img:url('../images/noche-cena.webp')" role="img" aria-label="Comensales cenando carne a la parrilla y vino tinto bajo las luces de Argento"></div>
+      <div class="night-veil"></div>
       <div class="grain" aria-hidden="true"></div>
       <div class="container">
         <header class="section-head reveal">
@@ -307,7 +323,7 @@
         </header>
 
         <div class="availability reveal" role="note">
-          <svg class="ico" aria-hidden="true"><use href="#i-calendar"/></svg> <span data-i18n="availability">Gran apertura: sábado 14 de noviembre — reservas abiertas</span>
+          <svg class="ico" aria-hidden="true"><use href="#i-calendar"/></svg> <span data-i18n="availability">Cena Show desde las 19:30 hs — reservas abiertas</span>
         </div>
 
         <div class="menu-grid stagger">
@@ -382,6 +398,16 @@
       </div>
     </section>
 
+    <!-- ═══════════════════════ PAUSA EN VIDEO · BANDONEÓN (NOCHE) ═══════════════════════ -->
+    <!-- Video propio, sin sonido, 4,5 s en loop. Separa los menús del show -->
+    <section class="video-break zone-night" aria-label="Bandoneón en vivo en Argento">
+      <video class="video-break-media" muted loop playsinline preload="metadata" poster="assets/images/bandoneon-poster.jpg" aria-label="Bandoneonista tocando en vivo entre las mesas de Argento" data-autoplay>
+        <source src="assets/video/bandoneon.mp4" type="video/mp4">
+      </video>
+      <div class="video-break-veil" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+    </section>
+
     <!-- ═══════════════════════ SECCIÓN 6 · EL SHOW (NOCHE) ═══════════════════════ -->
     <section id="show" class="show zone-night">
       <div class="spotlight" aria-hidden="true"></div>
@@ -401,7 +427,7 @@
         <div class="show-elements stagger">
           <article class="show-item">
             <div class="show-icon"><svg class="ico ico-solid" viewBox="0 0 200 320" aria-hidden="true"><use href="#tango-couple"/></svg></div>
-            <h3 data-i18n="s1T">3 parejas de tango</h3>
+            <h3 data-i18n="s1T">Bailarines de tango</h3>
             <p data-i18n="s1">Desde el tango más tradicional hasta el más apasionado. Tres estilos. Una sola pasión.</p>
           </article>
           <article class="show-item">
@@ -417,7 +443,7 @@
         </div>
 
         <div class="finale reveal">
-          <p data-i18n="fin1">Las tres parejas vuelven al escenario.</p>
+          <p data-i18n="fin1">Los bailarines vuelven al escenario.</p>
           <p data-i18n="fin2">La orquesta sube la intensidad.</p>
           <p data-i18n="fin3">El cantante entra nuevamente.</p>
           <p class="finale-big" data-i18n="fin4">Tango. Música. Pasión.</p>
@@ -432,44 +458,44 @@
           <h2 class="section-title" data-i18n="revTitle">Lo que dicen quienes ya vivieron Argento</h2>
           <!-- Datos reales de Google Maps (ficha "ARGENTO LA VIA", Garibaldi 1471). Actualizar a mano o con Places API (README) -->
           <p class="rating-badge">
-            <span class="g-logo" aria-hidden="true">G</span> <span class="g-star" aria-hidden="true">★</span> 4.7
-            <span data-i18n="revBadge">en Google · más de 2.000 opiniones</span>
+            <span class="g-logo" aria-hidden="true">G</span> <span class="g-star" aria-hidden="true">★</span> 4.8
+            <span data-i18n="revBadge">en Google · más de 2.300 opiniones</span>
           </p>
         </header>
 
         <div class="rating-summary reveal">
           <div class="rating-big">
-            <p class="rating-num">4.7</p>
-            <p class="stars" aria-label="4.7 de 5">★★★★★</p>
-            <p class="rating-count"><span data-i18n="revCount">2.060 opiniones</span></p>
+            <p class="rating-num">4.8</p>
+            <p class="stars" aria-label="4.8 de 5">★★★★★</p>
+            <p class="rating-count"><span data-i18n="revCount">2.304 opiniones</span></p>
           </div>
           <div class="rating-topics">
             <p data-i18n="revTopics">Lo que más mencionan</p>
             <ul>
-              <li><span data-i18n="topicShow">espectáculo</span> <b>133</b></li>
-              <li><span data-i18n="topicTango">tango</span> <b>79</b></li>
-              <li><span data-i18n="topicDancers">bailarines</span> <b>52</b></li>
+              <li><span data-i18n="topicShow">espectáculo</span> <b>150</b></li>
+              <li><span data-i18n="topicTango">tango</span> <b>83</b></li>
+              <li><span data-i18n="topicDancers">bailarines</span> <b>56</b></li>
             </ul>
           </div>
         </div>
 
         <!-- TODO: Integrar Google Places API — ver README sección "Reseñas reales".
-             Reseñas reales copiadas de Google Maps (oct 2026), con recortes marcados con […] -->
+             Reseñas reales copiadas de Google Maps (nov 2026), con recortes marcados con […] -->
         <div class="review-grid stagger" id="reviewGrid">
           <article class="review-card" lang="es">
-            <header><span class="avatar" style="--c:#2D6A4F">C</span><div><h3>Criss E.</h3><p>Local Guide · <time datetime="2026-09">sep 2026</time></p></div></header>
+            <header><span class="avatar" style="--c:#2D6A4F">P</span><div><h3>Pablo R.</h3><p>Local Guide · <time datetime="2026-11">nov 2026</time></p></div></header>
             <p class="stars" aria-label="5 de 5 estrellas">★★★★★</p>
-            <p>Abraham nos interceptó en frente del local, pregonando el menú del lugar, no nos costó aceptar su oferta. Una vez dentro, Don Fernando, un amable mozo, nos ubicó y nos recomendó la empanada de vacío… déjenme decirles que es la mejor […]</p>
+            <p>Ambos trabajamos en gastronomía de alto nivel y sabemos cómo debería trabajar el personal. […] Luego tenemos a nuestros amigos tangueros que empezaron a zapar y nos pareció un hermoso detalle, ya que se propaga lo cultural y lo lindo de este país. Honestamente LO MEJOR DE LA BOCA.</p>
           </article>
           <article class="review-card" lang="es">
-            <header><span class="avatar" style="--c:#C0392B">L</span><div><h3>Luisa O.</h3><p>Local Guide · <time datetime="2026-04">abr 2026</time></p></div></header>
+            <header><span class="avatar" style="--c:#C0392B">P</span><div><h3>Patricia M.</h3><p><time datetime="2026-11">nov 2026</time></p></div></header>
             <p class="stars" aria-label="5 de 5 estrellas">★★★★★</p>
-            <p>La atención de Fernando es muy buena, atento a tus necesidades y peticiones. […] Las porciones son grandes y la comida estuvo muy buena, tienen shows en vivo.</p>
+            <p>Excelente lugar para comer, platos gigantes y demasiado ricos […] tuvimos la suerte de ver un show de Tango bello!! Una experiencia que volvería a vivir si regreso a Caminito.</p>
           </article>
           <article class="review-card" lang="es">
-            <header><span class="avatar" style="--c:#1b2a4a">L</span><div><h3>Laura C.</h3><p><time datetime="2026-05">may 2026</time></p></div></header>
-            <p class="stars" aria-label="4 de 5 estrellas">★★★★<span class="star-off">★</span></p>
-            <p>Los choripanes gigantes. Las papas excelentes… […] Muy buena la atención. Recomendable.</p>
+            <header><span class="avatar" style="--c:#1b2a4a">A</span><div><h3>Alex B.</h3><p>Local Guide · <time datetime="2026-08">ago 2026</time></p></div></header>
+            <p class="stars" aria-label="5 de 5 estrellas">★★★★★</p>
+            <p>Excelente atención desde la captación del cliente en la vereda, amable y respetuosa. Un ambiente que invita a escuchar tango en vivo. […] Impecable la atención. La parrillada clásica para dos, un gol.</p>
           </article>
         </div>
 
@@ -503,7 +529,7 @@
 
     <!-- ═══════════════════════ SECCIÓN 8 · CÓMO LLEGAR ═══════════════════════ -->
     <section id="llegar" class="llegar zone-night">
-      <div class="section-bg night-img" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Calle_Caminito_in_La_Boca,_Buenos_Aires-2.JPG?width=1600')" role="img" aria-label="Calle Caminito con casas de colores"></div>
+      <div class="section-bg night-img" style="--img:url('../images/noche-arboles.webp')" role="img" aria-label="Mesas de Argento bajo los árboles con guirnaldas de luces, frente al río"></div>
       <div class="night-veil"></div>
       <div class="container">
         <header class="section-head reveal">
@@ -519,7 +545,7 @@
               <li><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg> <span><span>Caminito, La Boca, Buenos Aires</span><br><small class="info-note" data-i18n="infoAddress">La dirección exacta te la enviamos con la confirmación de tu reserva: puede variar según almuerzo, cena o clima.</small></span></li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> <a href="https://wa.me/5491178149294" target="_blank" rel="noopener">+54 9 11 7814-9294</a></li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> <span data-i18n="infoLunch">Almuerzo: lunes a domingo, 11:00–14:00 hs</span></li>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-moon"/></svg> <span data-i18n="infoDinner">Cena Show: desde el sábado 14 de noviembre (gran apertura)</span></li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-moon"/></svg> <span data-i18n="infoDinner">Cena Show: desde las 19:30 hs</span></li>
             </ul>
             <div class="directions">
               <h3 data-i18n="dirTitle">Cómo llegar</h3>
@@ -556,10 +582,12 @@
           <p data-i18n="b2b2">Si operás con turistas en Argentina, queremos trabajar con vos. Comisiones, acuerdos de largo plazo y soporte directo de nuestro equipo.</p>
         </div>
 
-        <!-- FORMSPREE: formulario "argento colaboradores" (cuenta de Brenda). Para cambiarlo, reemplazar el ID del action -->
-        <form class="b2b-form reveal" id="b2bForm" action="https://formspree.io/f/xdeaazwz" method="POST" novalidate>
+        <!-- FORMSUBMIT: las solicitudes llegan a reservas@tangoshowargento.com (sin cuenta; se activa con el primer envío, ver README) -->
+        <form class="b2b-form reveal" id="b2bForm" action="https://formsubmit.co/ajax/reservas@tangoshowargento.com" method="POST" novalidate>
           <input type="hidden" name="_subject" value="Nueva solicitud de socio — Argento Tango Experience">
-          <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="field">
             <label for="f-name" data-i18n="fName">Nombre completo *</label>
             <input id="f-name" name="nombre" type="text" autocomplete="name" required>
@@ -669,9 +697,9 @@
     </defs>
   </svg>
 
-  <script src="assets/js/i18n.js?v=16"></script>
-  <script src="assets/js/audio.js?v=16"></script>
-  <script src="assets/js/form.js?v=16"></script>
-  <script src="assets/js/main.js?v=16"></script>
+  <script src="assets/js/i18n.js?v=25"></script>
+  <script src="assets/js/audio.js?v=25"></script>
+  <script src="assets/js/form.js?v=25"></script>
+  <script src="assets/js/main.js?v=25"></script>
 </body>
 </html>

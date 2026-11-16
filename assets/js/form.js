@@ -1,6 +1,6 @@
 /* ==========================================================================
-   FORMULARIO B2B — validación + envío a Formspree (fetch, sin recargar)
-   Reemplazar REEMPLAZAR en el atributo action del <form id="b2bForm"> (ver README).
+   FORMULARIO B2B — validación + envío a FormSubmit (fetch, sin recargar)
+   Las solicitudes llegan a reservas@tangoshowargento.com (ver README).
    ========================================================================== */
 (function () {
   const form = document.getElementById("b2bForm");
@@ -68,7 +68,7 @@
     }
 
     const data = new FormData(form);
-    // Juntar los checkboxes en una sola línea legible en el mail de Formspree
+    // Juntar los checkboxes en una sola línea legible en el mail
     const ops = data.getAll("operacion");
     data.delete("operacion");
     data.append("operacion", ops.join(", ") || "—");
@@ -78,7 +78,9 @@
     setStatus("formSending");
     try {
       const res = await fetch(form.action, { method: "POST", body: data, headers: { Accept: "application/json" } });
-      if (!res.ok) throw new Error(res.status);
+      const json = await res.json().catch(() => ({}));
+      // FormSubmit responde 200 con success "false" si el envío no se entregó (p. ej. formulario sin activar)
+      if (!res.ok || String(json.success) !== "true") throw new Error(json.message || res.status);
       form.reset();
       setStatus("formOk", "ok");
     } catch (err) {
